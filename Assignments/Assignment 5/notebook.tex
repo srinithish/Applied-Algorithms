@@ -1,0 +1,664 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Applied\_algos\_Assignment\_5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment 5: Srinithish}\label{assignment-5-srinithish}
+
+    \subsection{Question 1}\label{question-1}
+
+\textbf{Show how to find the maximum spanning tree of a graph, which is
+the spanning tree of the largest total weight.?}
+
+The solution for finding the maximum spanning tree as same as the
+minimum spanning tree except that the edges are to be sorted in
+decreasing order when chosen to form the Maximum spanning tree.
+
+    \begin{verbatim}
+MaxST(G,eW): ## ew is the edge weights
+    A = {} ## empty set
+    
+    for each vertex v in G.V:
+    ## make a disjoint set where the parents are directly retrieved    
+        Make-set(v) 
+    
+    sort the edges of G.E into decreasing order by weight w
+    
+    for each edge (u,v) in G.E:  ##considered decreasing order
+    
+        if FIND-SET(u) != FIND-SET(v):
+    
+                A = A + {(u,v)} ##include in the maximum set
+                Union(u,v) ## make parents of u,v point to the same
+    
+    return A
+    
+\end{verbatim}
+
+    \subsection{Question 2}\label{question-2}
+
+\textbf{Consider an undirected graph G = (V, E) with nonnegative edge
+weights we. Suppose that you have computed a minimum spanning tree of G,
+and that you have also computed shortest paths to all nodes from a
+particular node s. Now suppose each edge weight is increased by 1; the
+new weights are w'e = we + 1.}
+
+\textbf{1. Does the minimum spanning tree change? Give an example where
+it changes or prove it cannot change. }
+
+    The minimum spanning tree doesnot change for the following reasons,
+consider the KRUSKAL algorithm, the order of the edges condiered and
+FIND-SET are the most important parts for the algorithm to execute and
+form a MST
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  When a constant c is added to every edge , the sorting order is not
+  disturbed and hence the order remains the same as the original Graph
+\item
+  And the step FIND-SET is also unchanged as the parents of original
+  Vertex are still the same in the new modified graph.
+\end{enumerate}
+
+Hence the MST remains the same but the Minimum Value is offset by the
+c*V
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Do the shortest paths change? Give an example where they
+  change or prove they cannot change?}
+\end{enumerate}
+
+Yes the shortest paths change as in below the example
+
+\includegraphics{attachment:orig\%20graph\%20prob\%202.JPG}
+
+    When 1 is added to each node the shortest path changes from 1
+-\textgreater{} 2 \textgreater{} 3 -\textgreater{} 4 to 1
+-\textgreater{} 4
+
+    \includegraphics{attachment:Prob2\%20Chnaged\%20Graph.JPG}
+
+    \subsection{Question 3}\label{question-3}
+
+    The algorithm will give a Minimum Spanning Tree becuase at each
+iteration we are only removing a edge if the residual graph is still
+connected , in case if we had the edge in the graph still it would be
+connected but with a more weight, we might as well remove the edge which
+is giving additinal edge weight to the graph. Also we are only removing
+the edge if the removal doenst render the trees disconnected In spanning
+tree we just need to ensure that it is connected and has minimum
+weights, We are keeping this invariant intact at every iteration as
+weight of the tree having this edge included in the graph is higher than
+if removed
+
+    \subsection{Question 4}\label{question-4}
+
+    Description 1. Pick a random vertex 's' and find do a BFS search
+starting from this vertex 2. With this you'll find shortest segmental
+distance (simple paths) to all the nodes. 3. Choose vertex whose
+distance from the start vertex was the maximum say 'b' 4. Now 'b' as
+start vertex do a BFS and find the vertex whose distance from b is
+maximum. 5. Now distance of 'a-b' is the diameter of the Tree T
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{import} \PY{n+nn}{queue}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}pick a random vertex}
+        
+        \PY{k}{def} \PY{n+nf}{BFS}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{start\PYZus{}node}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{Q} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+            \PY{n}{Q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{(}\PY{n}{start\PYZus{}node}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}node and the distance from start\PYZus{}node}
+             
+            \PY{n}{dictOfDistances} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                
+            \PY{k}{while} \PY{n}{Q}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{)} \PY{o}{!=} \PY{k+kc}{True}\PY{p}{:} 
+                \PY{p}{(}\PY{n}{p}\PY{p}{,}\PY{n}{parent\PYZus{}dist}\PY{p}{)} \PY{o}{=} \PY{n}{Q}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+                \PY{n}{p}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+                
+                \PY{k}{for} \PY{n}{neigh} \PY{o+ow}{in} \PY{n}{p}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:}
+                    
+                    \PY{n}{neigh\PYZus{}distance} \PY{o}{=} \PY{n}{parent\PYZus{}dist} \PY{o}{+} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{}\PYZsh{}one segment added}
+                    
+                    \PY{k}{if} \PY{n}{neigh}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+                        \PY{n}{Q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{(}\PY{n}{neigh}\PY{p}{,}\PY{n}{neigh\PYZus{}distance}\PY{p}{)}\PY{p}{)} 
+                    
+                    \PY{n}{dictOfDistances}\PY{p}{[}\PY{n}{neigh}\PY{p}{]} \PY{o}{=} \PY{n}{neigh\PYZus{}distance}
+            \PY{k}{return} \PY{n}{dictOfDistances}
+        
+        
+        \PY{n}{s} \PY{o}{=} \PY{n}{random}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+        \PY{n}{AllDistFromS} \PY{o}{=} \PY{n}{BFS}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{s}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}get the distance to all nodes from s}
+        
+        \PY{n}{a\PYZus{}node}\PY{p}{,}\PY{n}{distance}  \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{AllDistFromS}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{n}{distFromS}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} get the node that coresponds to the max distance from s}
+        
+        \PY{n}{AllDistFrom\PYZus{}a} \PY{o}{=} \PY{n}{BFS}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{a\PYZus{}node}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} set this node as the start node for the BFS}
+        
+        \PY{n}{b\PYZus{}node}\PY{p}{,}\PY{n}{Finaldistance} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{AllDistFrom\PYZus{}a}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{n}{distFromS}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} get the end node and distance from A}
+\end{Verbatim}
+
+
+    Above \textbf{a\_node -\/-\textgreater{} b\_node} is the max path and
+the diameter is the '\textbf{Finaldistance}'
+
+Since BFS take O(V+E) time and is called twice, Complexity is (V+E)
+
+    \subsection{Question 5}\label{question-5}
+
+    \includegraphics{attachment:Problem\%205.JPG}
+
+!
+
+    Description:
+
+Consider the above graph Let C be a cycle in the graph which contains
+edge e and e', These can be cycles in following configuration 1. Vertex
+\textbf{u} connects to ** x ** then** v** connects to \textbf{y }, note
+that this connection need not be direct it jus means that there is a
+path 2. Vertex \textbf{u} is connected to \textbf{y} and \textbf{v}
+connects to \textbf{x}
+
+Now the algorithm,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Remove edges e and e' from the graph and run dijsktra with source as
+  'u' We ll have min distances d to 'y' and 'x' from 'u'
+\item
+  Run the dijkstra with 'v' as the source to 'x' and 'y' , we'll have
+  min distances d' to x and y from v
+\item
+  In the first configuration when u -\/-\textgreater{} x and v
+  -\/-\textgreater{} y , the total cycle weight = a = w(e) + w(e') + x.d
+  + y.d'
+\item
+  In the first configuration when u -\/-\textgreater{}y and v
+  -\/-\textgreater{} x , the total cycle weight = b = w(e) + w(e') +
+  x.d' + y.d
+\end{enumerate}
+
+Then the weight of the shortest cycle containing e and e' is min(a,b)
+
+The complexity of algorithm is equal to dijkstra \(O(V^2*E)\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{findShortestCycle}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{p}{(}\PY{n}{u}\PY{p}{,}\PY{n}{v}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{Graph}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{(}\PY{n}{u}\PY{p}{,}\PY{n}{v}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} removes the edge e (u,v)}
+            \PY{n}{Graph}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} removes the edge e\PYZsq{} (x,y)}
+            
+            \PY{n}{dijkstra}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} find min distances from u to all vertices}
+            
+            \PY{n}{u\PYZus{}to\PYZus{}x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{distance}
+            \PY{n}{u\PYZus{}to\PYZus{}y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{distance}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{} initialise all d to zero }
+            \PY{n}{dijkstra}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{v}\PY{p}{)}  \PY{c+c1}{\PYZsh{}\PYZsh{} find min distances from u to all vertices}
+            
+            \PY{n}{v\PYZus{}to\PYZus{}x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{distance}
+            \PY{n}{v\PYZus{}to\PYZus{}y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{distance}
+            
+            
+            \PY{n}{cycle\PYZus{}Weight1} \PY{o}{=} \PY{n}{Graph}\PY{o}{.}\PY{n}{weight}\PY{p}{(}\PY{p}{(}\PY{n}{u}\PY{p}{,}\PY{n}{v}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{Graph}\PY{o}{.}\PY{n}{weight}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{u\PYZus{}to\PYZus{}x} \PY{o}{+} \PY{n}{v\PYZus{}to\PYZus{}y}
+            \PY{n}{cycle\PYZus{}Weight2} \PY{o}{=} \PY{n}{Graph}\PY{o}{.}\PY{n}{weight}\PY{p}{(}\PY{p}{(}\PY{n}{u}\PY{p}{,}\PY{n}{v}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{Graph}\PY{o}{.}\PY{n}{weight}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{v\PYZus{}to\PYZus{}x} \PY{o}{+} \PY{n}{u\PYZus{}to\PYZus{}y}
+            
+            
+            \PY{n}{minCycleWeight} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{cycle\PYZus{}Weight1}\PY{p}{,}\PY{n}{cycle\PYZus{}Weight2}\PY{p}{)}
+            
+            \PY{k}{if} \PY{n}{minCycleWeight} \PY{o}{!=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+                \PY{k}{return} \PY{n}{minCycleWeight}
+            
+            \PY{k}{else}\PY{p}{:} 
+                \PY{k}{return} \PY{k+kc}{False}
+            
+                              
+                              
+\end{Verbatim}
+
+
+    \subsection{Question 6}\label{question-6}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  In the below graph you can see that the flow is 2 + 4 (denoted in
+  green) i.e 6 however the total capacity of the edges leaving A
+  (source) is 8+10 i.e 18 and not equal to the flow. Hence disproved.
+
+  \includegraphics{attachment:6a.JPG}
+\end{enumerate}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The statement is false. Consider the below graph, initially the
+  minimum cut passes through edges (a,b) and (a,c) When all the edges
+  are added with 1 the minimum cut is edge (s,a). Hence disproved
+
+  \includegraphics{attachment:Q6b.png}
+\end{enumerate}
+
+    \subsection{Question 7}\label{question-7}
+
+\includegraphics{attachment:Q7.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  In the graph let the people be denoted by nodes on the left in fig
+  p\_nodes
+\item
+  Let hospitals be denoted by nodes on the right in the fig h\_nodes
+\item
+  Let the edges denote possibility of a person going to a certain
+  hospita i.e edge (p,h) denotes hospital h is in the allowed range of
+  the person p and p can visit it.
+\item
+  If there are hospitals h farther than allowed distance for a person p
+  then there exists no edge from p to h
+\item
+  This problem reduces to solving bipartite graph.
+\item
+  Create a dummy node s as source and t as sink
+\item
+  Connect all the people nodes to source as shown in the figure
+\item
+  Connect all the nodes from hospital to sink whose capacity each is
+  \textbf{n/k} and assign the same.
+\item
+  Assign a capacity of \textbf{1} to all the rest of the nodes
+\item
+  Now solve for the maximum flow using ford\_fulkerson , if the max flow
+  'f' happens to be n then this assignment of people to hospitals is
+  possible else its not
+\end{enumerate}
+
+The complexity of the algorithm is O(E*C)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{checkFeasibility}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{n\PYZus{}people}\PY{p}{,}\PY{n}{k\PYZus{}hospitals}\PY{p}{)}\PY{p}{:}
+            \PY{n}{maxFlow} \PY{o}{=} \PY{n}{Ford\PYZus{}Fulkerson}\PY{p}{(}\PY{n}{Graph}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}solve for max flow}
+            
+            \PY{k}{if} \PY{n}{maxFlow} \PY{o}{==} \PY{n}{n\PYZus{}people} \PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{True}
+            \PY{k}{else} \PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \subsection{Question 8}\label{question-8}
+
+    I arrived with the below solution with help of Swarnima Sowani We can
+solve this BFS assigning appropriate sets based on equaliteies and
+inequalities. Say we have set1 and set2 where set 1 has all elements
+with equal values and set 2 has all elements with value not equal to any
+variable from set 1.
+
+Let each of the variable \(x_1, x_2\) be vertices in the graph and let
+the constrains be denoted by the edges between them. Let all equlities
+be denoted as edges with weight 1 and inequalities be denoted with
+weight -1
+
+say if \(x_1 = x_2\) then edgeweight of \((x_1,x_2)\) is 1
+
+say if \(x_1 \ne x_2\) then edgeweight of \((x_1,x_2)\) is -1
+
+Starting with one node and applying BFS, we will explore all the
+neighbors and assign same set for equal variables and opposite sets for
+unequal variables. If some variable has already been assigned a set
+which is not following the constraint then return false else return True
+
+Example: For example in question, We will start with node x1 and assign
+it to set1 and insert it to queue. While queue not empty: Take the
+element in queue which is x1, and check all its neighbors.
+
+Since x1=x2 and x2.set = None, x2.set = x1.set that is both x1 and x2
+are assigned to set1 Then x1 != x4 and x4.set ==null so, x4 is assigned
+to set opposite to x1 that is set2. There are no more neighbors of x1 so
+start with next variable in queue that is x2. x2 has neighbor x3 with
+equality constraint and x3 has not assigned any set. So, set of x3 will
+be same as x2. x2 has no more neighbors so we will move with next
+element in queue that is x3. x3 has only one neighbor x3=x4 but x4 is
+assigned to set2 which is not same as the set of x3. Hence the
+constraints are violated.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{isSatisifying}\PY{p}{(}\PY{n}{Graph}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{Q} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+            \PY{n}{start\PYZus{}node} \PY{o}{=} \PY{n}{random}\PY{p}{(}\PY{n}{Graph}\PY{o}{.}\PY{n}{Vertices}\PY{p}{)}
+            \PY{n}{Q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{(}\PY{n}{start\PYZus{}node}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}node and the distance from start\PYZus{}node}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{}initialise all vertex set to None}
+            \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{Graph}\PY{o}{.}\PY{n}{Vertices}\PY{p}{:}
+                \PY{n}{v}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{k+kc}{None}
+            
+            \PY{n}{start\PYZus{}node}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{k}{while} \PY{n}{Q}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{)} \PY{o}{!=} \PY{k+kc}{True}\PY{p}{:} 
+                \PY{p}{(}\PY{n}{p}\PY{p}{,}\PY{n}{parent\PYZus{}dist}\PY{p}{)} \PY{o}{=} \PY{n}{Q}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+                \PY{n}{p}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+                
+                
+                \PY{k}{for} \PY{n}{neigh} \PY{o+ow}{in} \PY{n}{p}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:}
+                    
+                    \PY{n}{sign} \PY{o}{=} \PY{n}{Graph}\PY{o}{.}\PY{n}{weights}\PY{p}{(}\PY{p}{(}\PY{n}{p}\PY{p}{,}\PY{n}{neigh}\PY{p}{)}\PY{p}{)}
+                    
+                    \PY{k}{if} \PY{n}{neigh}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}if not already assigned the set}
+                        \PY{k}{if} \PY{n}{sign} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}  \PY{c+c1}{\PYZsh{}\PYZsh{}if its inequality}
+                            \PY{n}{neigh}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{n}{p}\PY{o}{.}\PY{n}{set}  \PY{c+c1}{\PYZsh{}\PYZsh{}give the opposite set}
+                        \PY{k}{if} \PY{n}{sign} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                            \PY{n}{neigh}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{n}{p}\PY{o}{.}\PY{n}{set} \PY{c+c1}{\PYZsh{}\PYZsh{}else same set}
+                            
+                            
+                    \PY{k}{if} \PY{n}{neigh}\PY{o}{.}\PY{n}{set} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}if already a set is assigned}
+                        
+                        \PY{k}{if} \PY{n}{sign} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}if its equality}
+                            
+                            \PY{k}{if} \PY{n}{neigh}\PY{o}{.}\PY{n}{set} \PY{o}{!=} \PY{n}{p}\PY{o}{.}\PY{n}{set}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}if its parent and neigh do not agree}
+                                \PY{k}{return} \PY{k+kc}{False}
+                        \PY{k}{if} \PY{n}{sign} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                            
+                            \PY{k}{if} \PY{n}{neigh}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{n}{p}\PY{o}{.}\PY{n}{set}\PY{p}{:}
+                                \PY{k}{return} \PY{k+kc}{False}
+                                
+                    \PY{k}{if} \PY{n}{neigh}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+                        \PY{n}{Q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{(}\PY{n}{neigh}\PY{p}{,}\PY{n}{neigh\PYZus{}distance}\PY{p}{)}\PY{p}{)} 
+                    
+            
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

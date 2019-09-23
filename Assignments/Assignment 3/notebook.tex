@@ -1,0 +1,1040 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment 3\_ Srinithish Kandagadla}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Question 1}\label{question-1}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let the A has won 'i' games and B has won 'j' games
+\item
+  Now Probability of A winning be defined by \(P(i,j)\)
+\item
+  There are two possibilites for the next game either A could win or B
+  could win.
+\item
+  The Probability of A winning the entire game (N wins) given A has won
+  the next match is \(0.5 * P(i+1,j)\)
+\item
+  The Probability of A winning the entire game (N wins) given B has won
+  the next match is \(0.5 * P(i,j+1)\)
+\item
+  Either of the above cases 4 or 5 could happen hence the probability is
+  \(0.5 * P(i+1,j) + 0.5 * P(i,j+1)\)
+\item
+  We solve this recursively as below and store the probability in a
+  dictionary with (i,j) as key so that we do not recalculate the
+  combination again
+\end{enumerate}
+probDictForWins = {}
+probAWin = 0.5
+probBWin = 0.5
+def prob(AWinsTillNow,BWinsTillNow,NForMatchWin):
+
+    if AWinsTillNow == NForMatchWin:
+        return 1
+    elif BWinsTillNow == NForMatchWin:
+        return 0
+    
+    else:
+        if (AWinsTillNow,BWinsTillNow) not in probDictForWins: ## if not already calculated
+        
+            probAWinsGameGivenAWinsNextMatch = probAWin*prob(AWinsTillNow+1,BWinsTillNow,NForMatchWin)
+            probAWinsGameGivenBWinsNextMatch = probBWin*prob(AWinsTillNow,BWinsTillNow+1,NForMatchWin)
+        
+            probDictForWins[(AWinsTillNow,BWinsTillNow)] = probAWinsGameGivenAWinsNextMatch + probAWinsGameGivenBWinsNextMatch
+            return probDictForWins[(AWinsTillNow,BWinsTillNow)]
+        else:
+            
+            return probDictForWins[(AWinsTillNow,BWinsTillNow)]
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{probDictForWins} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{k}{def} \PY{n+nf}{prob}\PY{p}{(}\PY{n}{AWinsTillNow}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{p}{,}\PY{n}{NForMatchWin}\PY{p}{)}\PY{p}{:}
+            \PY{n}{probAWin} \PY{o}{=} \PY{l+m+mf}{0.5}
+            \PY{n}{probBWin} \PY{o}{=} \PY{l+m+mf}{0.5}
+            \PY{k}{if} \PY{n}{AWinsTillNow} \PY{o}{==} \PY{n}{NForMatchWin}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{1}
+            \PY{k}{elif} \PY{n}{BWinsTillNow} \PY{o}{==} \PY{n}{NForMatchWin}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{0}
+            
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{if} \PY{p}{(}\PY{n}{AWinsTillNow}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{probDictForWins}\PY{p}{:}
+                    \PY{n}{probAWinsGameGivenAWinsNextMatch} \PY{o}{=} \PY{n}{probAWin}\PY{o}{*}\PY{n}{prob}\PY{p}{(}\PY{n}{AWinsTillNow}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{p}{,}\PY{n}{NForMatchWin}\PY{p}{)}
+                    \PY{n}{probAWinsGameGivenBWinsNextMatch} \PY{o}{=} \PY{n}{probBWin}\PY{o}{*}\PY{n}{prob}\PY{p}{(}\PY{n}{AWinsTillNow}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{NForMatchWin}\PY{p}{)}
+                
+                    \PY{n}{probDictForWins}\PY{p}{[}\PY{p}{(}\PY{n}{AWinsTillNow}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{probAWinsGameGivenAWinsNextMatch} \PY{o}{+} \PY{n}{probAWinsGameGivenBWinsNextMatch}
+                    \PY{k}{return} \PY{n}{probDictForWins}\PY{p}{[}\PY{p}{(}\PY{n}{AWinsTillNow}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{p}{)}\PY{p}{]}
+                \PY{k}{else}\PY{p}{:}
+                    
+                    \PY{k}{return} \PY{n}{probDictForWins}\PY{p}{[}\PY{p}{(}\PY{n}{AWinsTillNow}\PY{p}{,}\PY{n}{BWinsTillNow}\PY{p}{)}\PY{p}{]}
+            
+        \PY{n}{prob}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} 0.875
+\end{Verbatim}
+            
+    \subsection{Question 2}\label{question-2}
+Algorithm:
+
+MaxSubset[i,sum] = MaxSubset[i-1, sum-A[i]]     if A[i] <= sum
+                   MaxSubset[i-1, sum]          else
+                    
+
+The algorithm is O(NT) because we keep storing the sub calculations and the same combination of sum and index will not be calculated twice
+
+i.e 't' the sum can in worst case be all values from 1 to T
+    and each index combination with this is stored 
+    and when the sub problem leads to any of this combination, its never recacluated.
+    Hence at Max there are N*T combinations
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}code (pseudo code)}
+        \PY{n}{allElems} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{subsetDict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        \PY{n}{indexPath} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{findSubset}\PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{totalSum}\PY{p}{,}\PY{n}{allElems}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{if} \PY{n}{index} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} if index in recursion turns reduces to negative , there are no more elements}
+                \PY{k}{return} \PY{k+kc}{False}
+            
+            \PY{k}{elif} \PY{n}{index} \PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{totalSum} \PY{o}{==} \PY{l+m+mi}{0}  \PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} if rest of totalSum reduces to zero and the index is not below zero}
+                
+                \PY{k}{return} \PY{k+kc}{True}
+            
+            \PY{k}{if} \PY{n}{totalSum} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} when the element chosen is greater than the required sum itself}
+                \PY{k}{return} \PY{k+kc}{False}
+        
+                
+            \PY{k}{if} \PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{totalSum}\PY{p}{)} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{subsetDict}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}storing results in a dictinoary for caching and avoiding re calculating}
+                \PY{n}{subsetDict}\PY{p}{[}\PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{totalSum}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{findSubset}\PY{p}{(}\PY{n}{index}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}
+                                                          \PY{n}{totalSum}\PY{o}{\PYZhy{}}\PY{n}{allElems}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{,}
+                                                          \PY{n}{allElems}\PY{p}{)}
+                
+            \PY{k}{if} \PY{n}{subsetDict}\PY{p}{[}\PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{totalSum}\PY{p}{)}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True} \PY{p}{:}
+                \PY{n}{indexPath}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} tracking the solutions }
+        
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{subsetDict}\PY{p}{[}\PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{totalSum}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{findSubset}\PY{p}{(}\PY{n}{index}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{totalSum}\PY{p}{,}\PY{n}{allElems}\PY{p}{)}    
+                    
+                
+            \PY{k}{return} \PY{n}{subsetDict}\PY{p}{[}\PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{totalSum}\PY{p}{)}\PY{p}{]}
+        \PY{n}{findSubset}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{allElems}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} True
+\end{Verbatim}
+            
+    \subsection{Question 3}\label{question-3}
+
+    \paragraph{Divide and conquer
+approach}\label{divide-and-conquer-approach}
+
+Its a O(n logn) algorithm
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{def} \PY{n+nf}{getMaxDiff}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{p}{:}
+             \PY{n}{left} \PY{o}{=} \PY{n}{arr}\PY{p}{[} \PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}
+             \PY{n}{right} \PY{o}{=} \PY{n}{arr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:} \PY{p}{]}
+         
+             \PY{n}{leftDiff} \PY{o}{=} \PY{n}{getMaxDiff}\PY{p}{(}\PY{n}{left}\PY{p}{)}\PY{p}{;}
+             \PY{n}{rightDiff} \PY{o}{=} \PY{n}{getMaxDiff}\PY{p}{(}\PY{n}{right}\PY{p}{)}\PY{p}{;}
+             \PY{n}{minLeft} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{left}\PY{p}{)}
+             \PY{n}{maxRight} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{right}\PY{p}{)}
+             \PY{n}{centerDiff} \PY{o}{=} \PY{n}{maxRight} \PY{o}{\PYZhy{}} \PY{n}{minLeft}\PY{p}{;}
+             \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{centerDiff}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{leftDiff}\PY{p}{,}\PY{n}{rightDiff}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \paragraph{Dynamic Approach}\label{dynamic-approach}
+
+The complexity is O(N)
+
+    \$\max\_\{0 \leq i \leq n\}; \{A{[}i{]} - min(A{[}1:i-1{]})\} \$
+In the above equation minimum from 1 to i-1 is prepared before hand
+example if the list that is given is [2,4,5,1,0]
+Then the min list will be [2,2,2,1,0] i.e the minimum element till that index
+
+That way we do not run minimum over entire array at each i
+The equation in the above cell reduces to the below
+
+    \$\max\_\{0 \leq i \leq n\}; \{A{[}i{]} - minList{[}i-1{]})\} \$
+###pseudo code
+import random
+IsMaxMinInitialised = False
+minList  = []
+## denotes (indexOfMin, minimum Value) initialising all to 0,Infinity
+minList = [[0,float("Inf")] for _ in numList] 
+
+minList[0][1] = numList[0] ## storeing the first number as minimum for the first min
+
+numList = [1,23,5,6,7,8] ## say the list of numbers given
+
+def maxDiffTillIndex(tillIndex,numList):
+      
+    ###prepare min list till tillIndex
+    
+    if numList[tillIndex] < minList [tillIndex-1][1]: ## next index value is lesser
+        minList [tillIndex][1] = numList[tillIndex] ##update minValue
+        minList [tillIndex][0] = tillIndex ##update index from
+        
+        
+    else : ## if next index value is greater than the minimul till now
+        minList [tillIndex][1] = minList [tillIndex-1][1]
+        minList [tillIndex][0] = minList [tillIndex-1][0]
+    
+    
+    maxDiff = numList[tillIndex]-minList[tillIndex-1][1]
+    
+    return maxDiff, minList[tillIndex-1] ## difference and the (indexOfMin, minimum Value)
+
+
+
+def getMaxDiff(numList):
+    
+    
+    maxValue = -float("Inf") 
+    
+    for i in range(1,len(numList)):
+    
+        ## notice that the minimum list is prepared till 'i-1'already 
+        (maxDiff,(frmIndex,minValue))  = maxDiffTillIndex(i,numList) 
+             
+        ## find the max difference till now
+        if maxDiff > maxValue:
+            
+            maxValue = maxDiff
+            indexAt = frmIndex ## tracking the minimum index
+            tillIndex = i
+    return maxValue,indexAt,tillIndex ## max value , i, j
+            
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{n}{IsMaxMinInitialised} \PY{o}{=} \PY{k+kc}{False}
+        \PY{n}{minList}  \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{def} \PY{n+nf}{maxDiffTillIndex}\PY{p}{(}\PY{n}{tillIndex}\PY{p}{,}\PY{n}{numList}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{global} \PY{n}{IsMaxMinInitialised}
+            \PY{k}{global} \PY{n}{minList}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n}{IsMaxMinInitialised}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}\PYZsh{}index from where min came, minValue}
+                
+                \PY{n}{minList} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n}{numList}\PY{p}{]}
+                \PY{n}{minList}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{numList}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+                \PY{n}{IsMaxMinInitialised} \PY{o}{=} \PY{k+kc}{True}
+                
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}prepare min list}
+            \PY{k}{if} \PY{n}{numList}\PY{p}{[}\PY{n}{tillIndex}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} next index value is lesser}
+                \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{numList}\PY{p}{[}\PY{n}{tillIndex}\PY{p}{]} \PY{c+c1}{\PYZsh{}\PYZsh{}update minValue}
+                \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tillIndex} \PY{c+c1}{\PYZsh{}\PYZsh{}update index from}
+                
+                
+            \PY{k}{else} \PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} if next index value is greater than the minimul till now}
+                \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{minList} \PY{p}{[}\PY{n}{tillIndex}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            
+            
+            \PY{n}{maxDiff} \PY{o}{=} \PY{n}{numList}\PY{p}{[}\PY{n}{tillIndex}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{minList}\PY{p}{[}\PY{n}{tillIndex}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            
+            \PY{k}{return} \PY{n}{maxDiff}\PY{p}{,} \PY{n}{minList}\PY{p}{[}\PY{n}{tillIndex}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        
+        
+        \PY{k}{def} \PY{n+nf}{getMaxDiff}\PY{p}{(}\PY{n}{numList}\PY{p}{)}\PY{p}{:}
+            
+            
+            \PY{n}{maxValue} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{indexAt} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{numList}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                
+                \PY{p}{(}\PY{n}{maxDiff}\PY{p}{,}\PY{p}{(}\PY{n}{frmIndex}\PY{p}{,}\PY{n}{minValue}\PY{p}{)}\PY{p}{)}  \PY{o}{=} \PY{n}{maxDiffTillIndex}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{numList}\PY{p}{)}
+                
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{} find the max difference till now}
+                \PY{k}{if} \PY{n}{maxDiff} \PY{o}{\PYZgt{}} \PY{n}{maxValue}\PY{p}{:}
+                    
+                    \PY{n}{maxValue} \PY{o}{=} \PY{n}{maxDiff}
+                    \PY{n}{indexAt} \PY{o}{=} \PY{n}{frmIndex}
+                    \PY{n}{tillIndex} \PY{o}{=} \PY{n}{i}
+            \PY{k}{return} \PY{n}{maxValue}\PY{p}{,}\PY{n}{indexAt}\PY{p}{,}\PY{n}{tillIndex} \PY{c+c1}{\PYZsh{}\PYZsh{} max value , i, j}
+                    
+                    
+        \PY{n}{numList} \PY{o}{=} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{50000}\PY{p}{)}\PY{p}{]}
+        \PY{n}{solution} \PY{o}{=} \PY{n}{getMaxDiff}\PY{p}{(}\PY{n}{numList}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Maximum Difference is :}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{solution}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{and i is :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{solution}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ and j is :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{solution}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Maximum Difference is : 100 and i is : 41  and j is : 101
+
+    \end{Verbatim}
+
+    \subsection{Question 4}\label{question-4}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let all the people be invited first 1, . . . n.
+\item
+  Build a Graph on all the invited people.
+\item
+  Let the Subset \(I\) be the invited people (initially all the people),
+\item
+  Pick each of member \(i\) from set \(I\) and check if he satisifies
+  the condition that he knows 5 or more people and doesnt know 5 or more
+  people from \(I\)
+\item
+  If \(i\) doesnt satisfy the above condition remove \(i\) from set
+  \(I\) i.e \(I = I - {i}\)
+\item
+  Upadte the Graph on set \(I\) since the vertex \(i\) and its edges are
+  to be removed
+\item
+  While there exists \(i ∈ I\) such that condition 4 is violated, repeat
+  5 and 6
+\item
+  Return \(I\)
+\end{enumerate}
+### Pseudo Code:
+### building a graph has a function to delete a vertex , getChildren returns all the nodes children
+class graph():
+    
+    def __init__(self,dictOfNodesAndConnections = None):
+        
+        if dictOfNodesAndConnections is None:
+            
+        
+            self.nodesAndEdges = {}
+            
+        else:
+            self.nodesAndEdges = dict(dictOfNodesAndConnections)
+        pass
+    
+    def getChildren(self,atNode):
+        
+        if atNode in self.nodesAndEdges:
+            return self.nodesAndEdges[atNode]
+        else:
+            return []
+    
+    def delNode(self,node):
+        ## removing a node
+        if node in self.nodesAndEdges: 
+            del self.nodesAndEdges[node]
+        
+        ## refresh connections
+            ## removinga all edges
+            for vertex in self.nodesAndEdges:
+                if node in self.nodesAndEdges[vertex]:
+                    self.nodesAndEdges[vertex].remove(node)
+        else :
+            pass
+        
+        
+
+myOrigGraph = graph(dictOfConnections) ## orginal graph of all teh memebrs are considered
+inviteGraph = graph(dictOfConnections) ### invitation set which is constantly updated
+
+
+def removeInvites(inviteGraph):
+    
+    while True: ## while there exists a i violating the required condition
+    
+        listOfNodes = list(inviteGraph.nodesAndEdges.keys()) ## copying the memebers present in the set I currently
+        countOfRetainedInvites = 0
+        for node in listOfNodes:
+            
+            ## known <5 or unknown < 5 invalid members
+            if (len(inviteGraph.getChildren(node)) < 5 or  
+                len(inviteGraph.nodesAndEdges) - len(inviteGraph.getChildren(node)) < 5) :
+                inviteGraph.delNode(node)
+                
+                
+            else: ## valid members
+                countOfRetainedInvites +=1
+                
+        if countOfRetainedInvites == len(listOfNodes): ## if all of the memebrs in set I are valid
+            break;
+            
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} coding}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} function for generating random connections}
+         \PY{k}{def} \PY{n+nf}{genRandomConnections}\PY{p}{(}\PY{n}{totalMembers}\PY{p}{)}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}generate random connections}
+             \PY{n}{listOfConnections} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{totalMembers}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                                   \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{totalMembers}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{totalMembers}\PY{o}{*}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{} get unique conncetions}
+             \PY{n}{listOfConnections} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{listOfConnections}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{} remove self connections}
+             \PY{n}{listOfConnections} \PY{o}{=} \PY{p}{[}\PY{n}{conn} \PY{k}{for} \PY{n}{conn} \PY{o+ow}{in} \PY{n}{listOfConnections} \PY{k}{if} \PY{n}{conn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{n}{conn}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+             \PY{k}{return} \PY{n}{listOfConnections}
+         
+         \PY{n}{listOfConnections} \PY{o}{=} \PY{n}{genRandomConnections}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} converting connections to dictionary of node and its connections as list }
+         \PY{c+c1}{\PYZsh{}\PYZsh{} key is node and value is a list of nodes its conencted to.}
+         \PY{k}{def} \PY{n+nf}{convertToDictOfConnections}\PY{p}{(}\PY{n}{totalMembers}\PY{p}{,}\PY{n}{listOfConnections}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{dictOfConnections} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:}\PY{p}{[}\PY{p}{]} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{totalMembers}\PY{p}{)}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{for} \PY{n}{frmNode}\PY{p}{,}\PY{n}{toNode} \PY{o+ow}{in} \PY{n}{listOfConnections}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{toNode} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{dictOfConnections}\PY{p}{[}\PY{n}{frmNode}\PY{p}{]}\PY{p}{:}
+                     \PY{n}{dictOfConnections}\PY{p}{[}\PY{n}{frmNode}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{toNode}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{frmNode} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{dictOfConnections}\PY{p}{[}\PY{n}{toNode}\PY{p}{]}\PY{p}{:}
+                     \PY{n}{dictOfConnections}\PY{p}{[}\PY{n}{toNode}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{frmNode}\PY{p}{)} 
+             
+             \PY{k}{return} \PY{n}{dictOfConnections}
+             
+         
+         \PY{n}{dictOfConnections} \PY{o}{=} \PY{n}{convertToDictOfConnections}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{listOfConnections}\PY{p}{)}
+         
+         
+             
+                 
+         
+         \PY{k}{class} \PY{n+nc}{graph}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{dictOfNodesAndConnections} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{k}{if} \PY{n}{dictOfNodesAndConnections} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                     
+                 
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                     
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{dictOfNodesAndConnections}\PY{p}{)}
+                 \PY{k}{pass}
+             
+             \PY{k}{def} \PY{n+nf}{getChildren}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{atNode}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{k}{if} \PY{n}{atNode} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{:}
+                     \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{[}\PY{n}{atNode}\PY{p}{]}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{p}{[}\PY{p}{]}
+             
+             \PY{k}{def} \PY{n+nf}{delNode}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{node}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{} removing a node}
+                 \PY{k}{if} \PY{n}{node} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{:} 
+                     \PY{k}{del} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{[}\PY{n}{node}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{}\PYZsh{} refresh connections}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} removinga all edges}
+                     \PY{k}{for} \PY{n}{vertex} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{node} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{[}\PY{n}{vertex}\PY{p}{]}\PY{p}{:}
+                             \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{[}\PY{n}{vertex}\PY{p}{]}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{node}\PY{p}{)}
+                 \PY{k}{else} \PY{p}{:}
+                     \PY{k}{pass}
+                 
+                 
+         
+         \PY{n}{myOrigGraph} \PY{o}{=} \PY{n}{graph}\PY{p}{(}\PY{n}{dictOfConnections}\PY{p}{)}
+         \PY{n}{inviteGraph} \PY{o}{=} \PY{n}{graph}\PY{p}{(}\PY{n}{dictOfConnections}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{removeInvites}\PY{p}{(}\PY{n}{inviteGraph}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} while there exists a i violating the required condition}
+             
+                 \PY{n}{listOfNodes} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{inviteGraph}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{countOfRetainedInvites} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{listOfNodes}\PY{p}{:}
+                     
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} known \PYZlt{}5 or unknown \PYZlt{} 5}
+                     \PY{k}{if} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{inviteGraph}\PY{o}{.}\PY{n}{getChildren}\PY{p}{(}\PY{n}{node}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5} \PY{o+ow}{or}  
+                     \PY{n+nb}{len}\PY{p}{(}\PY{n}{inviteGraph}\PY{o}{.}\PY{n}{nodesAndEdges}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{inviteGraph}\PY{o}{.}\PY{n}{getChildren}\PY{p}{(}\PY{n}{node}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5}\PY{p}{)} \PY{p}{:}
+                         \PY{n}{inviteGraph}\PY{o}{.}\PY{n}{delNode}\PY{p}{(}\PY{n}{node}\PY{p}{)}
+                         
+                         
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{countOfRetainedInvites} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                         
+                 \PY{k}{if} \PY{n}{countOfRetainedInvites} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{listOfNodes}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} if all of the memebrs in I are valid}
+                     \PY{k}{break}\PY{p}{;}
+             \PY{k}{pass}
+         
+         
+         \PY{n}{removeInvites}\PY{p}{(}\PY{n}{inviteGraph}\PY{p}{)}                 
+         \PY{n}{inviteGraph}\PY{o}{.}\PY{n}{nodesAndEdges}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} \{0: [7, 9, 6, 16, 13, 15, 1, 3, 12, 19, 2],
+          1: [15, 6, 2, 5, 10, 0, 19, 3, 11, 8],
+          2: [3, 14, 1, 19, 13, 16, 0],
+          3: [19, 2, 9, 11, 14, 1, 0, 10, 16],
+          5: [1, 10, 13, 16, 12],
+          6: [1, 7, 0, 13, 10, 19],
+          7: [12, 0, 6, 15, 19, 11, 16],
+          8: [10, 13, 11, 16, 1],
+          9: [0, 3, 10, 13, 11, 12],
+          10: [8, 13, 14, 1, 9, 19, 15, 5, 3, 6, 12],
+          11: [3, 9, 13, 7, 8, 1],
+          12: [7, 15, 0, 9, 5, 16, 10],
+          13: [19, 10, 6, 0, 15, 9, 8, 5, 2, 11, 14],
+          14: [15, 2, 10, 3, 16, 13],
+          15: [1, 14, 13, 7, 0, 10, 12],
+          16: [0, 3, 5, 14, 8, 7, 12, 2],
+          19: [3, 13, 7, 10, 1, 2, 0, 6]\}
+\end{Verbatim}
+            
+    \subsection{Question 5}\label{question-5}
+
+    This is a Greedy Approach 1. Convert the given times in 24 Hour format.
+2. Sort the list of Jobs based on their finishing time in ascending
+order 3. For each job \(m\) that spans over midnight. a. Remove all of
+the jobs that are not comaptible with \(m\) in the set \(listOfJobs\)
+say the set is \(M_{noncomaptible}\) b. now solve greedely the sub
+problem \(listOfJobs - (m + M_{noncomaptible})\)
+
+Sub-problem solving: 1. Solving the sub problem involves first selecting
+the first job \(i\) in the sorted list 2. Remove all the jobs from
+sorted list that are incomatible with \(i\) 3. Repeat 1,2 till
+progressively on all the jobs in the sorted till all the jobs in the
+list are compatible.
+## imagines the listOfJobs list has jobs [(start,end)] in 24 HR format
+## main function to solve subproblem 
+def solveForMax(sortedList):
+    
+    
+    while True:
+        copySortedList = list(sortedList)
+        if len(copySortedList) == 0:
+            break;
+        for job in copySortedList:
+            ##pick a job remove its intersections if any
+            removeIntersectionsOfJobChosen(job,sortedList) 
+            
+        ## if all of the jobs are comaptinble in the list
+        if len(sortedList) == len(copySortedList): 
+            return sortedList        
+            
+
+## Main function choose each midnight job and solve the remainng subproblem withouth the job
+def checkMidnightJobs(intersectionDict,listOfJobTimes):
+
+    maxSolutionLen = -float("Inf")    
+    for job in intersectionDict: 
+        newListOfAllJobs = list(listOfJobTimes)
+        
+        if job[0] > job[1]:## choose a job that spans over midnight
+            removeIntersectionsOfJobChosen(job,newListOfAllJobs)
+            
+            ## sort the list according to the finishing time
+            sortedJobs = sorted(newListOfAllJobs,key = lambda x: x[1])
+            
+            ## solve the sub problem
+            solution   = solveForMax(sortedJobs)
+            if len(solution) > maxSolutionLen:
+                maxSolutionLen = len(solution)
+                maxSolution = solution
+                
+    return maxSolution   
+
+##pesudo code
+## auxilarry functions to support above
+
+## not the main funtion only to check incomaptible jobs
+def isIntersecting(timeInt1, timeInt2):
+    
+    if timeInt1[0] > timeInt1[1] and timeInt2[0] > timeInt2[1] : 
+    ## both crossing over night hence intersecting
+        return True
+    
+    ##both proper spanning within
+
+            
+    ##one of it is over midnight
+    
+        ##if time1 is over midnight
+        #other time2  is normal
+    if timeInt1[0] > timeInt1[1] : 
+        
+        if timeInt1[0] >=  timeInt2[1] and timeInt1[1] <=  timeInt2[0] :
+            return False
+        else:
+            return True
+   
+    ##if time2 is over midnight
+    #other time1 is normal
+    if timeInt2[0] > timeInt2[1] : 
+        
+        if timeInt2[0] >=  timeInt1[1] and timeInt2[1] <=  timeInt1[0] :
+            return False
+        else:
+            return True
+    
+    
+    ## if both are normal
+    if timeInt1[0] < timeInt1[1] and timeInt2[0] < timeInt2[1]:
+        ##start1 between time2
+        if timeInt1[0] >= timeInt2[0] and timeInt1[0] <= timeInt2[1]:
+            return True
+        ##start2 between time1
+        if timeInt2[0] >= timeInt1[0] and timeInt2[0] <= timeInt1[1]:
+            return True       
+        
+        else:
+            return False
+        
+    else:
+        
+        return False
+    
+jobNumbersPicked = []
+
+## building a graph like structure with all of key: job and value : incompatible jobs
+def getIntersectionDict(listOfJobTimes):
+    intersectionDict = {key: [] for key in listOfJobTimes}
+    for i,jobI in enumerate( listOfJobTimes):
+        
+        for j,jobJ in enumerate( listOfJobTimes):
+            
+            if i != j and isIntersecting(jobI,jobJ):
+                intersectionDict[jobI].append(jobJ)
+                
+            
+    return intersectionDict
+
+listOfJobTimes = [(18,6),(21,4),(3,14),(13,19)]
+
+
+## build intersection or jobs that are not compatible i.e key: Job and Value : list of non comaptible jobs
+intersectionDict = getIntersectionDict(listOfJobTimes)
+
+## function to remove all the jobs incomatible with the job chosen now
+def removeIntersectionsOfJobChosen(jobChosen,listOfJobs):
+    global intersectionDict
+    if jobChosen in intersectionDict:
+        for intJobs in intersectionDict[jobChosen]:
+            if intJobs in listOfJobs: ##try except may be less expsensive
+                listOfJobs.remove(intJobs)
+        
+    else:
+        return False
+        
+    pass
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{isIntersecting}\PY{p}{(}\PY{n}{timeInt1}\PY{p}{,} \PY{n}{timeInt2}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{if} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{and} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} 
+             \PY{c+c1}{\PYZsh{}\PYZsh{} both crossing over night hence intersecting}
+                 \PY{k}{return} \PY{k+kc}{True}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}both proper spanning within}
+         
+                     
+             \PY{c+c1}{\PYZsh{}\PYZsh{}one of it is over midnight}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}if time1 is over midnight}
+             \PY{k}{if} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} \PY{c+c1}{\PYZsh{}other time2 one is normal}
+                 
+                 \PY{k}{if} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=}  \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{and} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=}  \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{False}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{True}
+            
+             \PY{c+c1}{\PYZsh{}\PYZsh{}if time2 is over midnight}
+             \PY{k}{if} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} \PY{c+c1}{\PYZsh{}other one is normal}
+                 
+                 \PY{k}{if} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=}  \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{and} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=}  \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{False}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{True}
+             
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{} if both are normal}
+             \PY{k}{if} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{and} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}start1 between time2}
+                 \PY{k}{if} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{and} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{True}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}start2 between time1}
+                 \PY{k}{if} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{and} \PY{n}{timeInt2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{timeInt1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{True}       
+                 
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{False}
+                 
+             \PY{k}{else}\PY{p}{:}
+                 
+                 \PY{k}{return} \PY{k+kc}{False}
+             
+         \PY{n}{jobNumbersPicked} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{getIntersectionDict}\PY{p}{(}\PY{n}{listOfJobTimes}\PY{p}{)}\PY{p}{:}
+             \PY{n}{intersectionDict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:} \PY{p}{[}\PY{p}{]} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{listOfJobTimes}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{jobI} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(} \PY{n}{listOfJobTimes}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{k}{for} \PY{n}{j}\PY{p}{,}\PY{n}{jobJ} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(} \PY{n}{listOfJobTimes}\PY{p}{)}\PY{p}{:}
+                     
+                     \PY{k}{if} \PY{n}{i} \PY{o}{!=} \PY{n}{j} \PY{o+ow}{and} \PY{n}{isIntersecting}\PY{p}{(}\PY{n}{jobI}\PY{p}{,}\PY{n}{jobJ}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{intersectionDict}\PY{p}{[}\PY{n}{jobI}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{jobJ}\PY{p}{)}
+                         
+                     
+             \PY{k}{return} \PY{n}{intersectionDict}
+         
+         \PY{n}{listOfJobTimes} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} build intersection or jobs that are not compatible i.e key: Job and Value : list of non comaptible jobs}
+         \PY{n}{intersectionDict} \PY{o}{=} \PY{n}{getIntersectionDict}\PY{p}{(}\PY{n}{listOfJobTimes}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{removeIntersectionsOfJobChosen}\PY{p}{(}\PY{n}{jobChosen}\PY{p}{,}\PY{n}{listOfJobs}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{intersectionDict}
+             \PY{k}{if} \PY{n}{jobChosen} \PY{o+ow}{in} \PY{n}{intersectionDict}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{intJobs} \PY{o+ow}{in} \PY{n}{intersectionDict}\PY{p}{[}\PY{n}{jobChosen}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{intJobs} \PY{o+ow}{in} \PY{n}{listOfJobs}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}try except may be less expsensive}
+                         \PY{n}{listOfJobs}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{intJobs}\PY{p}{)}
+                 
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{k+kc}{False}
+                 
+             \PY{k}{pass}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} subproblem }
+         \PY{k}{def} \PY{n+nf}{solveForMax}\PY{p}{(}\PY{n}{sortedList}\PY{p}{)}\PY{p}{:}
+             
+             
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{copySortedList} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{sortedList}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{copySortedList}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{break}\PY{p}{;}
+                 \PY{k}{for} \PY{n}{job} \PY{o+ow}{in} \PY{n}{copySortedList}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{}pick a job remove its intersections if any}
+                     \PY{n}{removeIntersectionsOfJobChosen}\PY{p}{(}\PY{n}{job}\PY{p}{,}\PY{n}{sortedList}\PY{p}{)} 
+                     
+                 \PY{c+c1}{\PYZsh{}\PYZsh{} if all of the jobs are comaptinble in the list}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedList}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{copySortedList}\PY{p}{)}\PY{p}{:} 
+                     \PY{k}{return} \PY{n}{sortedList}        
+                     
+         
+         \PY{k}{def} \PY{n+nf}{checkMidnightJobs}\PY{p}{(}\PY{n}{intersectionDict}\PY{p}{,}\PY{n}{listOfJobTimes}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{maxSolutionLen} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+             \PY{k}{for} \PY{n}{job} \PY{o+ow}{in} \PY{n}{intersectionDict}\PY{p}{:} 
+                 \PY{n}{newListOfAllJobs} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{listOfJobTimes}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{job}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{job}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}\PY{c+c1}{\PYZsh{}\PYZsh{} choose a job that spans over midnight}
+                     \PY{n}{removeIntersectionsOfJobChosen}\PY{p}{(}\PY{n}{job}\PY{p}{,}\PY{n}{newListOfAllJobs}\PY{p}{)}
+                     
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} sort the list according to the finishing time}
+                     \PY{n}{sortedJobs} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{newListOfAllJobs}\PY{p}{,}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{solution}   \PY{o}{=} \PY{n}{solveForMax}\PY{p}{(}\PY{n}{sortedJobs}\PY{p}{)}
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{solution}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{maxSolutionLen}\PY{p}{:}
+                         \PY{n}{maxSolutionLen} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{solution}\PY{p}{)}
+                         \PY{n}{maxSolution} \PY{o}{=} \PY{n}{solution}
+                         
+             \PY{k}{return} \PY{n}{maxSolution}   
+                     
+         \PY{n}{checkMidnightJobs}\PY{p}{(}\PY{n}{intersectionDict}\PY{p}{,}\PY{n}{listOfJobTimes}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} [(21, 4), (13, 19)]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

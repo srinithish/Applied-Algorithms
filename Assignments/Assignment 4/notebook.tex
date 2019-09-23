@@ -1,0 +1,1024 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{AA\_Assignment4\_Srinithish}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment 4}\label{assignment-4}
+
+Graph base class that is used for every other problem
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{class} \PY{n+nc}{GraphNode}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{graphNodeId}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ID} \PY{o}{=} \PY{n}{graphNodeId}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{False}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{distance} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighbours} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{weights} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{parent} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{colour} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{White}\PY{l+s+s1}{\PYZsq{}}    
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{startTime} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{endTime} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{k+kc}{None} \PY{c+c1}{\PYZsh{}\PYZsh{} A or B}
+            
+            \PY{k}{def} \PY{n+nf}{addNeighbour}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{graphNodeId}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighbours}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{graphNodeId}\PY{p}{)}
+                
+            \PY{k}{def} \PY{n+nf}{getNeighbours}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighbours}
+            
+            \PY{k}{def} \PY{n+nf}{addWeight}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{weight}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{weights}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{weight}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{buildGraph}\PY{p}{(}\PY{n}{numNodes}\PY{p}{,}\PY{n}{listOfStrings}\PY{p}{)}\PY{p}{:}
+            \PY{n}{graphDict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{numNodes}\PY{p}{)}\PY{p}{:}
+                \PY{n}{graphDict}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{GraphNode}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                
+            \PY{k}{for} \PY{n}{graphComb}\PY{p}{,}\PY{n}{weight} \PY{o+ow}{in} \PY{n}{listOfStrings}\PY{p}{:}
+                
+                \PY{n}{graphDict}\PY{p}{[}\PY{n}{graphComb}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{addNeighbour}\PY{p}{(}\PY{n}{graphComb}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{graphDict}\PY{p}{[}\PY{n}{graphComb}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{addWeight}\PY{p}{(}\PY{n}{weight}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{graphDict}
+\end{Verbatim}
+
+
+    
+
+    \subsection{Question 1}\label{question-1}
+
+\paragraph{Description}\label{description}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Do a topological sort on DAG which is of complexity O(V+E)
+\item
+  In the order of topologically sorted array S check if node \(S_{i+1}\)
+  is a child of node \(S_{i}\) where \(i\) is the index position of the
+  sorted list.
+
+  Say {[}A,C,B,D{]}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    check if C is a child of A
+  \item
+    check if B is child of C
+  \item
+    check if D is child of B
+  \item
+    So on till the last element of the sorted nodes Break if any of the
+    above condition is not satisified
+  \end{itemize}
+\item
+  if \(S_{i+1}\) is a child of \(S_{i}\) for all \(i\) then there exists
+  a path which passes through all vertices else there is no such path.
+\item
+  The above checking takes at most \(O(E)\) hence the algorithm is at
+  most O(V+E)
+\end{enumerate}
+
+    \subsubsection{Pseudo code}\label{pseudo-code}
+
+\begin{verbatim}
+### bulid a DAG graph
+graph = buildGraph(6,listOfConnections)
+
+### topologically sort the graph
+sortedNodes = topologicalSort(graph)
+
+def checkExistantPath(sortedNodes,graphDict):
+    
+    ##check if (i+1) is child of (i)
+    
+    for i in range(len(sortedNodes)-1):
+        
+        fromNode = sortedNodes[i]
+        toNode = sortedNodes[i+1]
+        
+        if toNode not in graphDict[fromNode].neighbours:
+            return False
+    
+    return True
+ 
+checkExistantPath(sortedNodes,graph)
+\end{verbatim}
+
+    \subsubsection{Code}\label{code}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{listOfConnections} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}   \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} ((NodeA,NodeB),weight)}
+        \PY{n}{sortedNodes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{currTime} \PY{o}{=} \PY{l+m+mi}{0}
+        
+        \PY{k}{def} \PY{n+nf}{DFSVisit}\PY{p}{(}\PY{n}{graphDict}\PY{p}{,}\PY{n}{currNodeID}\PY{p}{)}\PY{p}{:}
+            \PY{k}{global} \PY{n}{sortedNodes}
+            \PY{k}{global} \PY{n}{currTime}
+            \PY{n}{currTime} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}    print(currNodeID,\PYZdq{} start time \PYZdq{},currTime)}
+            \PY{n}{graphDict}\PY{p}{[}\PY{n}{currNodeID}\PY{p}{]}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+            \PY{n}{graphDict}\PY{p}{[}\PY{n}{currNodeID}\PY{p}{]}\PY{o}{.}\PY{n}{startTime} \PY{o}{=} \PY{n}{currTime}
+            
+            \PY{k}{for} \PY{n}{neighNodeID} \PY{o+ow}{in} \PY{n}{graphDict}\PY{p}{[}\PY{n}{currNodeID}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:}
+                \PY{n}{neigNode} \PY{o}{=} \PY{n}{graphDict}\PY{p}{[}\PY{n}{neighNodeID}\PY{p}{]}
+                
+                \PY{k}{if} \PY{n}{neigNode}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}            print(\PYZdq{}Visiting \PYZdq{},neigNode.getID())}
+                    \PY{n}{neigNode}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+                    
+                    \PY{n}{DFSVisit}\PY{p}{(}\PY{n}{graphDict}\PY{p}{,}\PY{n}{neighNodeID}\PY{p}{)}
+            
+            
+            \PY{n}{currTime} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}    print(currNodeID,\PYZdq{} end time \PYZdq{},currTime)}
+            \PY{n}{graphDict}\PY{p}{[}\PY{n}{currNodeID}\PY{p}{]}\PY{o}{.}\PY{n}{endTime} \PY{o}{=} \PY{n}{currTime}
+            \PY{n}{sortedNodes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{currNodeID}\PY{p}{)}
+            
+            
+        \PY{k}{def} \PY{n+nf}{DFS}\PY{p}{(}\PY{n}{graphDict}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{global} \PY{n}{currTime}
+            
+            \PY{k}{for} \PY{n}{nodeID}\PY{p}{,}\PY{n}{node} \PY{o+ow}{in} \PY{n}{graphDict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+               
+                \PY{k}{if} \PY{n}{node}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+                    
+                    
+                    \PY{n}{DFSVisit}\PY{p}{(}\PY{n}{graphDict}\PY{p}{,}\PY{n}{node}\PY{o}{.}\PY{n}{ID}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{topologicalSort}\PY{p}{(}\PY{n}{graphDict}\PY{p}{)}\PY{p}{:}
+            \PY{n}{DFS}\PY{p}{(}\PY{n}{graphDict}\PY{p}{)}
+            \PY{k}{return} \PY{n}{sortedNodes}
+          
+          
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{graph} \PY{o}{=} \PY{n}{buildGraph}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{n}{listOfConnections}\PY{p}{)}
+        \PY{n}{topologicalSort}\PY{p}{(}\PY{n}{graph}\PY{p}{)}
+        \PY{n}{sortedNodes} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{reversed}\PY{p}{(}\PY{n}{sortedNodes}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{checkExistantPath}\PY{p}{(}\PY{n}{sortedNodes}\PY{p}{,}\PY{n}{graphDict}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedNodes}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                
+                \PY{n}{fromNode} \PY{o}{=} \PY{n}{sortedNodes}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                \PY{n}{toNode} \PY{o}{=} \PY{n}{sortedNodes}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}may need to change this}
+                \PY{k}{if} \PY{n}{toNode} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{graphDict}\PY{p}{[}\PY{n}{fromNode}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:}
+                    \PY{k}{return} \PY{k+kc}{False}
+            
+            \PY{k}{return} \PY{k+kc}{True}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The nodes in topological order are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sortedNodes}\PY{p}{)}
+        \PY{n}{checkExistantPath}\PY{p}{(}\PY{n}{sortedNodes}\PY{p}{,}\PY{n}{graph}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The nodes in topological order are  [0, 1, 2, 3, 4, 5]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} False
+\end{Verbatim}
+            
+    \subsubsection{Question 2}\label{question-2}
+
+    \begin{verbatim}
+For each edge v-t
+
+  1. Form a graph that is the same as G, except that edge v-t is removed.
+  2. Record the shortest path dist(v, t) from v to t using dijkstra (this can be done tracking the parents from t till you arrive at v)
+
+  3. If dist(v,t) is not Infinity then there is a cycle
+  
+          In the recorded shortest path,
+          
+           if there was edge e' with weight w(e') in the shortest path less w(v-t)
+                  - Then remove the edge w(e') from the graph
+                  - add e' to the set of edges in the feedback set 
+                  - replace edge e(v-t) back into the graph
+
+           else put e(v-t) in the feedback edge set
+
+At the end we have Feedback set of edges that render the Graph Acyclic
+\end{verbatim}
+
+    \subsection{Question 3}\label{question-3}
+
+    \paragraph{Description}\label{description}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Do a DFS on the nodes and assign alternatively Set A and Set B to
+  parent and child
+\item
+  In the process if you encounter a node that is visited and has the
+  following conditions,
+\end{enumerate}
+
+\begin{verbatim}
+   if parentNode.set == 'A' and neighNode.set == 'A':
+      
+             return False
+     
+    if parentNode.set == 'B' and neighNode.set == 'B':
+     
+            return False
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  If there is no violation of the above rule \emph{return True}
+\end{enumerate}
+
+This algorithm runs with complexity O(V+E)
+
+    \paragraph{Pseudo Code}\label{pseudo-code}
+
+\begin{verbatim}
+def DFSCheck(graphDict,parentNode):
+
+
+    parentNode.visited = True
+    
+    for neighNode in parentNode.neighbours:
+        
+        
+        ## assign sets if set is still unassigned
+        if neighNode.set is None:
+            if parentNode.set == 'A':
+                neighNode.set = 'B'
+            elif parentNode.set == 'B':
+                neighNode.set = 'A'
+        
+        ###  check compliance
+        elif neighNode.set is not None:
+            if parentNode.set == 'A' and neighNode.set == 'A':
+                return False
+            if parentNode.set == 'B' and neighNode.set == 'B':
+                return False
+                
+        
+        ##if the node is already note visisted
+        if neighNode.visited == False:
+
+            neighNode.visited = True
+            DFSCheck(graphDict,neighNode)
+            
+            
+## main function which runs DFSCheck on all nodes once  
+def isPartitioon(graphDict):
+
+
+  for parentNode in graphDict.items():
+
+
+          if parentNode.visited == False:
+              ##  if node not visited initialise with set A as the 
+              node.set = 'A'
+
+
+          Flag = DFSCheck(graphDict,parentNode)
+
+  if Flag == False:
+
+      return False  
+
+   else:
+        return True 
+        
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{listOfConnections} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+            
+        \PY{n}{graph} \PY{o}{=} \PY{n}{buildGraph}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{listOfConnections}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{DFSCheck}\PY{p}{(}\PY{n}{graphDict}\PY{p}{,}\PY{n}{currNodeID}\PY{p}{)}\PY{p}{:}
+        
+            
+            \PY{n}{parentNode} \PY{o}{=} \PY{n}{graphDict}\PY{p}{[}\PY{n}{currNodeID}\PY{p}{]}
+            \PY{n}{parentNode}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+            
+            \PY{k}{for} \PY{n}{neighNodeID} \PY{o+ow}{in} \PY{n}{parentNode}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:}
+                \PY{n}{neighNode} \PY{o}{=} \PY{n}{graphDict}\PY{p}{[}\PY{n}{neighNodeID}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{} assign sets}
+                \PY{k}{if} \PY{n}{neighNode}\PY{o}{.}\PY{n}{set} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{parentNode}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{neighNode}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{k}{elif} \PY{n}{parentNode}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{neighNode}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}  check compliance}
+                \PY{k}{elif} \PY{n}{neighNode}\PY{o}{.}\PY{n}{set} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{parentNode}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{neighNode}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{k}{return} \PY{k+kc}{False}
+                    \PY{k}{if} \PY{n}{parentNode}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{neighNode}\PY{o}{.}\PY{n}{set} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{k}{return} \PY{k+kc}{False}
+                        
+                
+                \PY{k}{if} \PY{n}{neighNode}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+        
+                    \PY{n}{neighNode}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{n}{DFSCheck}\PY{p}{(}\PY{n}{graphDict}\PY{p}{,}\PY{n}{neighNodeID}\PY{p}{)}
+                    
+        \PY{k}{def} \PY{n+nf}{isPartitioon}\PY{p}{(}\PY{n}{graphDict}\PY{p}{)}\PY{p}{:}
+            
+            
+            \PY{k}{for} \PY{n}{nodeID}\PY{p}{,}\PY{n}{node} \PY{o+ow}{in} \PY{n}{graphDict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+               
+                \PY{k}{if} \PY{n}{node}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}\PYZsh{} initialise with A}
+                    \PY{n}{node}\PY{o}{.}\PY{n}{set} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}
+                    
+                    
+                \PY{n}{Flag} \PY{o}{=} \PY{n}{DFSCheck}\PY{p}{(}\PY{n}{graphDict}\PY{p}{,}\PY{n}{node}\PY{o}{.}\PY{n}{ID}\PY{p}{)}
+                    
+            \PY{k}{return} \PY{k+kc}{False} \PY{k}{if} \PY{n}{Flag} \PY{o}{==} \PY{k+kc}{False} \PY{k}{else} \PY{k+kc}{True}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{isPartitioon}\PY{p}{(}\PY{n}{graph}\PY{p}{)}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+
+    \end{Verbatim}
+
+    \subsubsection{Question 4}\label{question-4}
+
+    \paragraph{Description}\label{description}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Imagine a Graph to be represented in Adjacency matrix
+\item
+  Collect all the nodes \{V'\} that have zero incoming edges i.e
+  in-degree 0 which would be scheduled the first. Basiclly columns in
+  the Adjacency Matrix that are all zero
+\item
+  Remove the collected nodes from Graph G since they can all be
+  scheduled in a semester
+\item
+  Now the adjacency matrix reduces to smaller matrix without these nodes
+\item
+  Repeat 1 to 4 on the reduced adjacency matrix till there are no more
+  vertices left
+\end{enumerate}
+
+This algorith takes O(V+E) complexity
+
+    \paragraph{pseudo code}\label{pseudo-code}
+
+\begin{verbatim}
+def assignSemesters(adjacencyMatrix):
+
+    ### set of all columns
+    listOfColumnNames = list(range(len(adjacencyMatrix[0]))) 
+    
+    listOfSems = []
+    
+    while (len(listOfColumnNames)>0): ### runs equal to max V times
+      
+        semCourses = []
+        columnIndices = []
+        
+        
+        for column in range(len(adjacencyMatrix)):
+            
+            if sum(adjacencyMatrix[:,column]) == 0: ## no incoming edges
+                semCourses.append(listOfColumnNames[column])
+                columnIndices.append(column)
+        
+        
+        ### remove the nodes with in-degree zero
+        ### remove correspingin columns and rows and update the adjacencyMatrix
+        ### ~ is negation
+        adjacencyMatrix = adjacencyMatrix[~columnIndices,~columnIndices]
+        
+
+        ## remove the nodes that are scheduled in this semster
+        listOfColumnNames = listOfColumnNames - semCourses 
+        
+        
+        ###grouped courses
+        listOfSems.append(semCourses)
+        
+        
+
+        
+    return listOfSems
+\end{verbatim}
+
+    \paragraph{Code}\label{code}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{adjacencyMatrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                    \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                    \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                    \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{assignSemesters}\PY{p}{(}\PY{n}{adjacencyMatrix}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{listOfColumnNames} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{adjacencyMatrix}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} set of all columns}
+            
+            \PY{n}{listOfSems} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{while} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{listOfColumnNames}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} runs equal to max V times}
+              
+                \PY{n}{semCourses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{columnIndices} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{adjacencyMatrix}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{adjacencyMatrix}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{column}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} no incoming edges}
+                        \PY{n}{semCourses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{listOfColumnNames}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{columnIndices}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+                
+                \PY{n}{copyAdj} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{adjacencyMatrix}\PY{p}{,}\PY{n}{columnIndices}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} delete correspingin columns}
+                \PY{n}{copyAdj} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{copyAdj}\PY{p}{,}\PY{n}{columnIndices}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} delete coreesonponding rows}
+                
+        
+                \PY{c+c1}{\PYZsh{}\PYZsh{} remove rest of the columns}
+                \PY{n}{listOfColumnNames} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{listOfColumnNames}\PY{p}{,} \PY{n}{columnIndices}\PY{p}{)} 
+                
+                
+                \PY{n}{adjacencyMatrix} \PY{o}{=} \PY{n}{copyAdj}
+                
+                \PY{n}{listOfSems}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{semCourses}\PY{p}{)}
+                
+                
+        
+                
+            \PY{k}{return} \PY{n}{listOfSems}
+        
+        \PY{n}{listOfSems} \PY{o}{=} \PY{n}{assignSemesters}\PY{p}{(}\PY{n}{adjacencyMatrix}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the semester grouping for the above configuration is :}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{n}{listOfSems}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the semester grouping for the above configuration is : [[0, 1], [2], [3]]
+
+    \end{Verbatim}
+
+    \subsubsection{Question 5}\label{question-5}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:Q5\%20Correct.jpg}
+\caption{Q5\%20Correct.jpg}
+\end{figure}
+
+This is wrong and proved by the following above example
+
+In the \textbf{\emph{fig1}} with negative edges,
+
+\begin{itemize}
+\item
+  For the path A -\textgreater{} B -\textgreater{} C the path length is
+  2.
+\item
+  For the path A -\textgreater{} D -\textgreater{} E -\textgreater{} C
+  the path length is -6.
+\end{itemize}
+
+The shortest path is A -\textgreater{} D -\textgreater{} E
+-\textgreater{} C
+
+Now lets add +10 to all the edges so that every edge is now positive
+which results in \textbf{\emph{fig2}}
+
+\begin{itemize}
+\tightlist
+\item
+  For the path A -\textgreater{} B -\textgreater{} C the path length is
+  22.
+\item
+  For the path A -\textgreater{} D -\textgreater{} E -\textgreater{} C
+  the path length is 24.
+\end{itemize}
+
+The shortest path is now A -\textgreater{} B -\textgreater{} C not as
+before hence the solutions are not the same if you offset the paths by
+large positive number
+
+    \subsubsection{Question 6}\label{question-6}
+
+    \begin{verbatim}
+for each node in graph as source node (s):
+
+      1. Run Dijkstra on the Graph with source as 's'
+      2. We would have now computed distances  d(s,t) from the source node to all other target nodes (t)
+      3. Compute the all the cycle distances starting at 's' and ending at 's'
+             cycleLength = d(s,t) + weight(t,v)
+             Note: if edge E(t -> v) is not existant add weight(t,v) as infinity
+      
+      4. Append all the cycleLenghts in a list
+  
+Finally find:
+minCycle = min(cycleLengths)
+
+if min(cycleLengths) == Infinty 
+      return 'NoCycle'
+else:
+    return minCycle
+      
+            
+      
+\end{verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The outer loop in the \textbf{findShortestCycle} runs on every vertex
+  in graph
+\item
+  Inside this loop \textbf{dijkstra} runs , which takes \(O(V^2)\) when
+  prioprty queue is implemented as a simple array
+\item
+  Inner loop also runs on each vertex in the graph hence \(O(V)\) Hence
+  total complexity is \(V*O(V^2) + O(V^2)\) ie \(O(V^3)\)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{listOfConnections} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        
+        \PY{n}{graph} \PY{o}{=} \PY{n}{buildGraph}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{n}{listOfConnections}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{initialiseSourceAndGraph}\PY{p}{(}\PY{n}{sourceID}\PY{p}{,}\PY{n}{graph}\PY{p}{)}\PY{p}{:}  
+        
+            \PY{k}{for} \PY{n}{nodeID} \PY{o+ow}{in} \PY{n}{graph}\PY{p}{:}
+                \PY{k}{if} \PY{n}{nodeID} \PY{o}{==} \PY{n}{sourceID}\PY{p}{:}
+                    \PY{n}{graph}\PY{p}{[}\PY{n}{nodeID}\PY{p}{]}\PY{o}{.}\PY{n}{distance} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{graph}\PY{p}{[}\PY{n}{nodeID}\PY{p}{]}\PY{o}{.}\PY{n}{distance} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n}{graph}
+        
+        \PY{k}{def} \PY{n+nf}{relax}\PY{p}{(}\PY{n}{parentNode}\PY{p}{,}\PY{n}{childNode}\PY{p}{,}\PY{n}{weight}\PY{p}{)}\PY{p}{:}
+            
+            
+            \PY{k}{if} \PY{n}{childNode}\PY{o}{.}\PY{n}{distance} \PY{o}{\PYZgt{}} \PY{p}{(}\PY{n}{parentNode}\PY{o}{.}\PY{n}{distance} \PY{o}{+} \PY{n}{weight}\PY{p}{)}\PY{p}{:}
+               \PY{n}{childNode}\PY{o}{.}\PY{n}{distance} \PY{o}{=} \PY{n}{parentNode}\PY{o}{.}\PY{n}{distance} \PY{o}{+} \PY{n}{weight}
+                
+        \PY{k}{def} \PY{n+nf}{dijkstra}\PY{p}{(}\PY{n}{sourceNodeID}\PY{p}{,}\PY{n}{graph}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{initialiseSourceAndGraph}\PY{p}{(}\PY{n}{sourceNodeID}\PY{p}{,}\PY{n}{graph}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} makes source 0 and allother distances as infinity}
+        
+            \PY{n}{prioityQueue} \PY{o}{=} \PY{n}{graph}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} not a deep copy }
+            
+            \PY{k}{while} \PY{n+nb}{len}\PY{p}{(}\PY{n}{prioityQueue}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} extract min}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} prirority queue implemented as array}
+                \PY{n}{minDistNodeID} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{prioityQueue}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{i}\PY{p}{:}  \PY{n}{prioityQueue}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{distance}\PY{p}{)} 
+                \PY{k}{del} \PY{n}{prioityQueue}\PY{p}{[}\PY{n}{minDistNodeID}\PY{p}{]}
+            
+                \PY{k}{for} \PY{n}{childNodeID}\PY{p}{,}\PY{n}{weight} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{graph}\PY{p}{[}\PY{n}{minDistNodeID}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{p}{,}\PY{n}{graph}\PY{p}{[}\PY{n}{minDistNodeID}\PY{p}{]}\PY{o}{.}\PY{n}{weights}\PY{p}{)}\PY{p}{:}
+                    
+                    \PY{n}{parentNode} \PY{o}{=} \PY{n}{graph}\PY{p}{[}\PY{n}{minDistNodeID}\PY{p}{]}
+                    \PY{n}{childNode} \PY{o}{=} \PY{n}{graph}\PY{p}{[}\PY{n}{childNodeID}\PY{p}{]}
+                    \PY{n}{relax}\PY{p}{(}\PY{n}{parentNode}\PY{p}{,}\PY{n}{childNode}\PY{p}{,}\PY{n}{weight}\PY{p}{)}
+                    
+        
+        \PY{k}{def} \PY{n+nf}{findShortestCycle}\PY{p}{(}\PY{n}{graph}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cycleLenghts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{startVertex} \PY{o+ow}{in} \PY{n}{graph}\PY{p}{:} \PY{c+c1}{\PYZsh{}\PYZsh{} on every vertex as source run dijkstra}
+              
+                \PY{n}{dijkstra}\PY{p}{(}\PY{n}{startVertex}\PY{p}{,}\PY{n}{graph}\PY{p}{)}
+                
+                \PY{k}{for} \PY{n}{endVertex} \PY{o+ow}{in} \PY{n}{graph}\PY{p}{:}
+                    \PY{n}{weight} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                    \PY{k}{if} \PY{n}{startVertex} \PY{o+ow}{in} \PY{n}{graph}\PY{p}{[}\PY{n}{endVertex}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:}
+                        \PY{n}{weightIndex} \PY{o}{=} \PY{n}{graph}\PY{p}{[}\PY{n}{endVertex}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{startVertex}\PY{p}{)}
+                        \PY{n}{weight} \PY{o}{=}  \PY{n}{graph}\PY{p}{[}\PY{n}{endVertex}\PY{p}{]}\PY{o}{.}\PY{n}{weights}\PY{p}{[}\PY{n}{weightIndex}\PY{p}{]}
+                        
+                    \PY{n}{cycleLength} \PY{o}{=} \PY{n}{weight} \PY{o}{+} \PY{n}{graph}\PY{p}{[}\PY{n}{endVertex}\PY{p}{]}\PY{o}{.}\PY{n}{distance} \PY{c+c1}{\PYZsh{}\PYZsh{} record cycle lengths}
+                    \PY{n}{cycleLenghts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cycleLength}\PY{p}{)}
+        
+            \PY{n}{shortest} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{cycleLenghts}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{} get the minimum possible cycle lengths if any}
+            \PY{k}{if} \PY{n}{shortest} \PY{o}{==} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No Cycle}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{shortest}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the shortest cycle is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{findShortestCycle}\PY{p}{(}\PY{n}{graph}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the shortest cycle is  4
+
+    \end{Verbatim}
+
+    \subsection{Question 7}\label{question-7}
+
+\subsubsection{Part A}\label{part-a}
+
+\paragraph{Description}\label{description}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Start a BFS from starting at node "s"
+\item
+  Put 's' in Queue Q
+\item
+  Extract a element from Q and and expand its neighbours
+\item
+  From the neighbours put only those nodes into the queue whose edge
+  weights \$L\_e \le L \$
+\item
+  After Dequeuing, first check if this node was the target city "t" and
+  else continue with the BFS
+\end{enumerate}
+
+    \begin{verbatim}
+Input: G=(V,E), edge weights "L(e)", initial node "s", final node "t" 
+    and L fuel tank capacity
+Output: True/False
+\end{verbatim}
+
+    \paragraph{Pseudocode}\label{pseudocode}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k}{def} \PY{n+nf}{checkPossibility}\PY{p}{(}\PY{n}{graph}\PY{p}{,}\PY{n}{startNode}\PY{p}{,}\PY{n}{terminalNode}\PY{p}{,}\PY{n}{FuelTankCapacity}\PY{p}{)}\PY{p}{:}
+            \PY{n}{q} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+            \PY{n}{q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{startNode}\PY{p}{)} \PY{c+c1}{\PYZsh{} Push \PYZdq{}startNode\PYZdq{} to the queue}
+        
+            \PY{k}{while} \PY{n}{q}\PY{o}{.}\PY{n}{qsize} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:} \PY{c+c1}{\PYZsh{} queue is not empty}
+                \PY{n}{nextNode} \PY{o}{=} \PY{n}{q}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} extract an element from the queue}
+                \PY{n}{nextNode}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+                
+                \PY{k}{if} \PY{n}{nextNode} \PY{o}{==} \PY{n}{terminalNode}\PY{p}{:} \PY{c+c1}{\PYZsh{} Target city reached}
+                    \PY{k}{return} \PY{k+kc}{True}
+        
+                \PY{k}{for}  \PY{n}{neigh} \PY{o+ow}{in} \PY{n}{graph}\PY{p}{[}\PY{n}{nextNode}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:} \PY{c+c1}{\PYZsh{} exploring neighbors of nextNode}
+                    
+                    \PY{c+c1}{\PYZsh{}\PYZsh{} if distance betweeen cities is less that the fuel tank capacity and the node is not already visited}
+                    \PY{k}{if} \PY{n}{EdgeWeight}\PY{p}{[}\PY{n}{nextNode}\PY{p}{,}\PY{n}{neigh}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{FuelTankCapacity} \PY{o+ow}{and} \PY{n}{nextNode}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False} \PY{p}{:} 
+                        
+                        \PY{n}{q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{neigh}\PY{p}{)} \PY{c+c1}{\PYZsh{} Push \PYZdq{}neigh\PYZdq{} to the queue}
+        
+            \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \subsection{Question 7}\label{question-7}
+
+\subsubsection{Part B}\label{part-b}
+
+    The problem here is to minimize the inter cities distance instead of
+optimizing the total distance from source "s" to a terminal node 't',
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We can use Dijkstra's algorithm but instead of basing the priority in
+  the queue on the distance from the source , we would rank it
+  accorifing to Edge weights from parent to neighbours while putting
+  into the queue.
+\item
+  This ensures that we are minimsing the segemental length (city
+  distance) at every stage
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{getMinTankCapacity}\PY{p}{(}\PY{n}{Graph}\PY{p}{,}\PY{n}{startNode}\PY{p}{,}\PY{n}{terminalNode}\PY{p}{)}\PY{p}{:}
+          
+            \PY{n}{priorQ} \PY{o}{=} \PY{n}{queue}\PY{o}{.}\PY{n}{PriorityQueue}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} elements in priority\PYZhy{}queue =\PYZgt{} (priority,node,max\PYZus{}edge)}
+            \PY{n}{priorQ}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{startNode}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Push (edge\PYZhy{}weight as priority,node,max\PYZus{}edge along the path) to the priority\PYZhy{}queue}
+          
+            \PY{k}{while} \PY{o+ow}{not} \PY{n}{priorQ}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} till queue is not empty}
+                
+                \PY{p}{(}\PY{n}{priority}\PY{p}{,}\PY{n}{fromCity}\PY{p}{,}\PY{n}{max\PYZus{}edge\PYZus{}till\PYZus{}now}\PY{p}{)} \PY{o}{=} \PY{n}{priorQ}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} extract an element with minimum edge length}
+              
+                \PY{n}{fromCity}\PY{o}{.}\PY{n}{visited} \PY{o}{=} \PY{k+kc}{True}
+                
+                \PY{k}{if} \PY{n}{fromCity} \PY{o}{==} \PY{n}{terminalNode}\PY{p}{:} \PY{c+c1}{\PYZsh{} goal city state reached}
+                    \PY{k}{return} \PY{n}{max\PYZus{}edge\PYZus{}till\PYZus{}now} \PY{c+c1}{\PYZsh{} The max edge weight along the path would be the minimum fuel tank capacity needed}
+        
+                \PY{k}{for} \PY{n}{nextCity} \PY{o+ow}{in} \PY{n}{graph}\PY{p}{[}\PY{n}{fromCity}\PY{p}{]}\PY{o}{.}\PY{n}{neighbours}\PY{p}{:} \PY{c+c1}{\PYZsh{} exploring neighbors of fromCity}
+                    \PY{n}{distFtoN} \PY{o}{=} \PY{n}{E}\PY{p}{(}\PY{n}{fromCity}\PY{p}{,}\PY{n}{nextCity}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}city distances}
+                    \PY{n}{max\PYZus{}edge\PYZus{}till\PYZus{}now} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{distFtoN}\PY{p}{,}\PY{n}{max\PYZus{}edge\PYZus{}till\PYZus{}now}\PY{p}{)}
+                    
+                    \PY{k}{if} \PY{n}{nextCity}\PY{o}{.}\PY{n}{visited} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+                    
+                    \PY{c+c1}{\PYZsh{} Push (edge\PYZhy{}weight as priority,node,max\PYZus{}edge along the path)  to the priority\PYZhy{}queue}
+                        \PY{n}{priorQ}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{(}\PY{n}{distFtoN}\PY{p}{,}\PY{n}{nextCity}\PY{p}{,}\PY{n}{max\PYZus{}edge\PYZus{}till\PYZus{}now}\PY{p}{)}\PY{p}{)} 
+        
+            \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
